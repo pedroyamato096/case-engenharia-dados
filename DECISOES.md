@@ -19,6 +19,11 @@ A análise inicial identificou situações que exigirão critérios explícitos:
 - Os status não estão representados de maneira uniforme no destino. Há diferenças de maiúsculas, minúsculas e espaços, como `enviado`, `ENVIADO `, `entregue` e `PAGO `.
 - As datas possuem formatos diferentes: a origem usa data, hora e fuso horário; o destino não informa o fuso horário.
 - A origem possui operações `I`, `U` e `D`, mas ainda será necessário definir como interpretar o estado final quando houver exclusão ou eventos fora de ordem.
+- Foram encontrados eventos do mesmo pedido com o mesmo timestamp. Como não existe uma informação adicional para determinar qual ocorreu primeiro, foi utilizada a ordem original das linhas no arquivo como critério de desempate.
+
+Essa escolha não significa que a ordem do arquivo represente a ordem real dos eventos. Ela foi adotada apenas para tornar o processamento determinístico e reproduzível. Caso a ordem original seja alterada, o estado reconstruído poderá mudar nesses casos.
+
+
 
 Esses casos não foram classificados como divergências nesta etapa, pois primeiro é necessário definir as regras de interpretação.
 
@@ -29,6 +34,8 @@ Esses casos não foram classificados como divergências nesta etapa, pois primei
 - Os valores de `status` deverão ser normalizados para permitir comparação sem considerar diferenças de caixa ou espaços externos.
 - As diferenças de formato das datas não serão consideradas divergências automaticamente.
 - Um campo vazio na origem não será substituído por um valor inventado. O tratamento será definido durante a reconstrução do estado atual.
+- Quando dois eventos do mesmo pedido possuem o mesmo valor em `atualizado_em`, o evento que aparece depois no arquivo é considerado o mais recente.
+- A ordem original do arquivo é usada somente como critério técnico de desempate, não como garantia cronológica.
 
 ## Limitações
 
@@ -38,6 +45,7 @@ Esses casos não foram classificados como divergências nesta etapa, pois primei
 - O destino contém IDs repetidos, portanto não pode ser tratado automaticamente como uma tabela com uma linha garantida por pedido sem investigação adicional.
 - As datas do destino não possuem informação de fuso horário, o que pode limitar uma comparação temporal exata.
 - Os resultados dependem das regras adotadas para os casos ambíguos.
+- Eventos com o mesmo timestamp não podem ser ordenados com certeza, pois o arquivo não possui um identificador sequencial ou outra informação que indique a ordem real de ocorrência.
 
 ## Uso de IA
 
