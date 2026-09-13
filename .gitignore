@@ -1,0 +1,21 @@
+# Ambientes virtuais
+.venv/
+venv/
+
+# Cache e artefatos Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Configurações locais do VS Code
+.vscode/
+
+# Relatórios gerados pelo script
+saida/*.csv
+
+# Arquivos locais de configuração
+.env
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
