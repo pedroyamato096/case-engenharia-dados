@@ -1,15 +1,19 @@
 # Resumo executivo
 
-> Preencher após executar a reconciliação com os dados recebidos.
-
-- Total de pedidos analisados: **a preencher**
-- Pedidos divergentes: **a preencher**
-- Impacto financeiro: **a preencher**
+- Total de pedidos analisados: **133**
+- Pedidos divergentes: **36**
+- Impacto financeiro (origem - destino): **R$ -18,173.44**
 
 ## Principais problemas
 
-A preencher com os tipos de divergência e a quantidade de casos de cada tipo.
+- ATUALIZADO_EM_DIVERGENTE: **4**
+- AUSENTE_NO_DESTINO: **5**
+- DUPLICADO_NO_DESTINO: **4**
+- ID_CLIENTE_DIVERGENTE: **3**
+- INDEVIDO_NO_DESTINO: **5**
+- MULTIPLOS_CAMPOS_DIVERGENTES: **8**
+- VALOR_TOTAL_DIVERGENTE: **7**
 
 ## Prioridade
 
-A preencher com o problema que deve ser tratado primeiro e sua justificativa de negócio.
+O primeiro tratamento deve corrigir pedidos ausentes, indevidos e duplicados, pois esses problemas afetam a existência e a contagem dos pedidos no relatório. Em seguida, devem ser corrigidas as divergências de valor, por seu impacto direto no faturamento.
