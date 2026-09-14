@@ -27,6 +27,7 @@ def normalizar_datas(
 def normalizar_dataframe(
 	dados: pd.DataFrame,
 	tem_operacao: bool = False,
+	fuso_horario_sem_fuso: str = "America/Sao_Paulo",
 ) -> pd.DataFrame:
 	"""Retorna uma copia com os campos conhecidos normalizados."""
 	dados_normalizados = dados.copy()
@@ -43,7 +44,8 @@ def normalizar_dataframe(
 
 	if "atualizado_em" in dados_normalizados.columns:
 		dados_normalizados["atualizado_em"] = normalizar_datas(
-			dados_normalizados["atualizado_em"]
+			dados_normalizados["atualizado_em"],
+			fuso_horario_sem_fuso,
 		)
 
 	if tem_operacao and "operacao" in dados_normalizados.columns:
