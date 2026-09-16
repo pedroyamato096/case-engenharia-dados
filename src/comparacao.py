@@ -93,6 +93,7 @@ def comparar_estados(
 	ids_duplicados_destino = obter_ids_duplicados(destino)
 	divergencias = []
 
+
 	for id_pedido in sorted(ids_origem - ids_destino):
 		divergencias.append(
 			_criar_divergencia(

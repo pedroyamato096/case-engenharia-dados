@@ -37,7 +37,7 @@ def main():
 
     origem_atual, pedidos_excluidos = reconstruir_estado_atual(origem)
     divergencias = comparar_estados(origem_atual, destino)
-
+    
     PASTA_SAIDA.mkdir(exist_ok=True)
     divergencias.to_csv(PASTA_SAIDA / "relatorio_divergencias.csv", index=False)
 
